@@ -1,0 +1,1 @@
+This website was built with the [HCZ Material theme](https://github.com/codeasashu/hcz-jekyll-blog) for [Jekyll](https://jekyllrb.com/). The theme itself is licensed under the MIT License (see LICENSE-HCZ-MATERIAL-THEME). The content (text, images, etc.) are not covered by this license.

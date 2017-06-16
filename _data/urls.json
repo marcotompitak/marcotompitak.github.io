@@ -1,0 +1,28 @@
+[
+  {
+    "text": "Home",
+    "url": "/",
+    "icon": "fa-home",
+    "layout": "post"
+  },
+  {
+    "text": "About",
+    "url": "/about/",
+    "icon": "fa-user"
+  },
+  {
+    "text": "Projects",
+    "url": "/projects",
+    "icon": "fa-desktop"
+  },
+  {
+    "text": "Publications",
+    "url": "/publications",
+    "icon": "fa-file-text-o"
+  },
+  {
+    "text": "Github",
+    "url": "https://github.com/marcotompitak",
+    "icon": "fa-github"
+  }
+]

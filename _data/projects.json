@@ -1,0 +1,34 @@
+[
+	{
+		"name": "Nucleosome Positioning with Markov Chains",
+		"image": "Selection.png",
+		"url": "https://SchiesselLab.github.io/index.html#proj-markov",
+        "github": "https://github.com/SchiesselLab/MarkovModel",
+		"date": "2016",
+		"tags": ["Python","Bioinformatics"]
+	},
+	{
+		"name": "3D Visualization of the RBP Model",
+		"image": "Nucleosome.png",
+		"url": "https://SchiesselLab.github.io/index.html#proj-rbp3d",
+        "github": "https://github.com/SchiesselLab/RBP3D",
+		"date": "2016",
+		"tags": ["HTML","Javascript"]
+	},
+	{
+		"name": "Map analysis: Dynamic Color Binning",
+		"image": "pol.png",
+		"url": "http://www.rapiddiffusion.com/history/dynamic-color-binning-united-states/",
+        "github": "https://github.com/marcotompitak/dynamic-color-binning",
+		"date": "Feb 2016",
+		"tags": ["Python","OpenCV"]
+	},
+	{
+		"name": "My Runkeeper data and the weather",
+		"image": "gpx.png",
+		"url": "http://www.rapiddiffusion.com/datascience/runkeeper-gps-weather-data/",
+		"date": "Apr 2016",
+		"tags": ["Python","Bash"]
+	}
+
+]

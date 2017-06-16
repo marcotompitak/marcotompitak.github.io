@@ -1,0 +1,66 @@
+---
+layout: default
+---
+<article class="post">
+
+  <div class="post-content">
+    {{ content }}
+
+    <div class="projects row" style="text-align: justify">
+    <h3> Biophysics and bioinformatics </h3>
+    <ol style="counter-reset: item">
+    {% assign counter = 1 %}
+    {% for i in site.data.pubs-bio %}
+        {% assign counter = counter | plus: 1 %}
+        <li style="margin-bottom: 1em">
+            {{ i.Author }} <br />
+
+            <i>{{ i.Title }}</i> <br />
+
+            {{ i.Journal }} {{ i.Volume }}
+
+            {{ i.Pages }} ({{ i.Year }})
+
+            {% if i.URL != "" %} [<a href="{{ i.URL }}">url</a>] {% endif %}
+        </li>
+    {% endfor %}
+    </ol>
+
+        <h3> History </h3>
+    <ol start="{{ counter }}">
+    {% for i in site.data.pubs-history %}
+        {% assign counter = counter | plus: 1 %}
+        <li class="publist">
+            {{ i.Author }} <br />
+
+            <i>{{ i.Title }}</i> <br />
+
+            {{ i.Journal }} {{ i.Volume }}
+
+            {{ i.Pages }} ({{ i.Year }})
+
+            {% if i.URL != "" %} [<a href="{{ i.URL }}">url</a>] {% endif %}
+        </li>
+    {% endfor %}
+    </ol>
+
+    <h3> Gravitational waves </h3>
+    <ol start="{{ counter }}">
+    {% for i in site.data.pubs-gw %}
+        <li class="publist">
+            {{ i.Author }} <br />
+
+            <i>{{ i.Title }}</i> <br />
+
+            {{ i.Journal }}  {{ i.Volume }}
+
+            {{ i.Pages }} ({{ i.Year }})
+
+            {% if i.URL != "" %} [<a href="{{ i.URL }}">url</a>] {% endif %}
+        </li>
+    {% endfor %}
+    </ol>
+    </div>
+  </div>
+
+</article>
