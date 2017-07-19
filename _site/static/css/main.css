@@ -231,3 +231,25 @@ footer {
 a {
     color: #0063a0
 }
+
+
+
+table.padded-table td {
+    padding-left: 1em;
+    padding-top: 0.2em;
+}
+
+table.padded-table {
+    margin-bottom: 1.5em
+}
+
+table.dataframe td, th{
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    padding-top: 0.1em;
+    padding-bottom: 0.1em;
+}
+
+table.dataframe {
+    margin-bottom: 1.5em
+}

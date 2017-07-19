@@ -13,15 +13,18 @@ layout: default
     {% for i in site.data.pubs-bio %}
         {% assign counter = counter | plus: 1 %}
         <li style="margin-bottom: 1em">
-            {{ i.Author }} <br />
+
+            {% if i.URL != "" %} <a href="{{ i.URL }}"> {% endif %}
 
             <i>{{ i.Title }}</i> <br />
+            
+            {% if i.URL != "" %} </a> {% endif %}
+            
+            {{ i.Author }} <br />
 
             {{ i.Journal }} {{ i.Volume }}
 
             {{ i.Pages }} ({{ i.Year }})
-
-            {% if i.URL != "" %} [<a href="{{ i.URL }}">url</a>] {% endif %}
         </li>
     {% endfor %}
     </ol>
@@ -31,15 +34,17 @@ layout: default
     {% for i in site.data.pubs-history %}
         {% assign counter = counter | plus: 1 %}
         <li class="publist">
-            {{ i.Author }} <br />
+            {% if i.URL != "" %} <a href="{{ i.URL }}"> {% endif %}
 
             <i>{{ i.Title }}</i> <br />
+            
+            {% if i.URL != "" %} </a> {% endif %}
+            
+            {{ i.Author }} <br />
 
             {{ i.Journal }} {{ i.Volume }}
 
             {{ i.Pages }} ({{ i.Year }})
-
-            {% if i.URL != "" %} [<a href="{{ i.URL }}">url</a>] {% endif %}
         </li>
     {% endfor %}
     </ol>
@@ -48,15 +53,17 @@ layout: default
     <ol start="{{ counter }}">
     {% for i in site.data.pubs-gw %}
         <li class="publist">
-            {{ i.Author }} <br />
+            {% if i.URL != "" %} <a href="{{ i.URL }}"> {% endif %}
 
             <i>{{ i.Title }}</i> <br />
+            
+            {% if i.URL != "" %} </a> {% endif %}
+            
+            {{ i.Author }} <br />
 
-            {{ i.Journal }}  {{ i.Volume }}
+            {{ i.Journal }} {{ i.Volume }}
 
             {{ i.Pages }} ({{ i.Year }})
-
-            {% if i.URL != "" %} [<a href="{{ i.URL }}">url</a>] {% endif %}
         </li>
     {% endfor %}
     </ol>
