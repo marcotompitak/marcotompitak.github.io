@@ -8,6 +8,8 @@ permalink: /kaggle-zillow/
 Kaggle Competition: Zillow Home Valuation Prediction
 ----------------------------------------------------
 
+_(This is a static version of an iPython notebook. The actual notebook and further code can be found on [GitHub](https://github.com/marcotompitak/gravitational-waves).)_
+
 I'm going to use XGBoost to fit a boosted tree ensemble to the data from the [Zillow Kaggle Competition](https://www.kaggle.com/c/zillow-prize-1). The quantity to predict is the size of the error that Zillow's own algorithm has made in predicting housing prices, based on a large number of variables describing the house. Since we're trying to capture the errors in model that's already being used, it will probably be difficult to make any headway, but that's why it's a competition.
 
 First we will load the required libraries, load in the data, and preprocess the data.
