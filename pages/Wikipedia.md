@@ -7,7 +7,7 @@ permalink: /kaggle-wikipedia/
 Kaggle Competition: Wikipedia Traffic Time Series
 -------------------------------------------------
 
-_(This is a static version of an iPython notebook. The actual notebook and further code can be found on [GitHub](https://github.com/marcotompitak/gravitational-waves).)_
+_(This is a static version of an iPython notebook. The actual notebook and further code can be found on [GitHub](https://github.com/marcotompitak/kaggle-code/tree/master/Wikipedia%20Traffic).)_
 
 In this notebook we'll have a look at the [Wikipedia Traffic Kaggle competition](https://www.kaggle.com/c/web-traffic-time-series-forecasting). The goal is to forecast the amount of traffic to various Wikipedia pages.
 
