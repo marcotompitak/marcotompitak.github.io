@@ -1,5 +1,29 @@
 [
 	{
+		"name": "Kaggle Competition: Wikipedia Traffic",
+		"image": "wikipedia.png",
+		"url": "/kaggle-wikipedia/",
+        "github": "https://github.com/marcotompitak/kaggle-code/tree/master/Wikipedia%20Traffic",
+		"date": "Jul 2017",
+		"tags": ["Python","fbprophet","time series"]
+	},
+	{
+		"name": "Kaggle Competition: Zillow Home Valuation",
+		"image": "zillow.png",
+		"url": "/kaggle-zillow/",
+        "github": "https://github.com/marcotompitak/kaggle-code/tree/master/Zillow",
+		"date": "Jul 2017",
+		"tags": ["Python","xgboost"]
+	},
+	{
+		"name": "Gravitational Waves and Matched Filters",
+		"image": "chirp.png",
+		"url": "/matched-filter/",
+        "github": "https://github.com/marcotompitak/gravitational-waves",
+		"date": "Jul 2017",
+		"tags": ["Python","MCMC","Didactic"]
+	},
+	{
 		"name": "Nucleosome Positioning with Markov Chains",
 		"image": "Selection.png",
 		"url": "https://SchiesselLab.github.io/index.html#proj-markov",
