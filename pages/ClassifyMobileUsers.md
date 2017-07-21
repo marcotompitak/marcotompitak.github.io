@@ -11,7 +11,7 @@ _(This is a static version of an iPython notebook. The actual notebook can be fo
 
 This is an analysis for the [TalkingData Mobile User Demographics](https://www.kaggle.com/c/talkingdata-mobile-user-demographics) Kaggle competition. The competition was already closed when I started this, but I went through it for practice. I got a score of 2.29, which, if I had been able to join the leaderboard, would have been at position 1028 out of 1689; a decent enough score for a simple approach.
 
-From the discussion board of the competition, it seems like many people used `xgboost` for this challenge, but I've done a competition with `xgboost` before, so I'll try something else: logistic regression. This was not so trivial, because I quickly ran out of memory to store my one-hot encoded features. Full credit goes to the person who made [this beautiful kernel](https://www.kaggle.com/dvasyukova/a-linear-model-on-apps-and-labels) available for teaching me how to get around that.
+From the discussion board of the competition, it seems like many people used `xgboost` for this challenge, but I've done a competition with `xgboost` [before](/kaggle-zillow/), so I'll try something else: logistic regression. This was not so trivial, because I quickly ran out of memory to store my one-hot encoded features. Full credit goes to the person who made [this beautiful kernel](https://www.kaggle.com/dvasyukova/a-linear-model-on-apps-and-labels) available for teaching me how to get around that.
 
 The challenge is to classify the users of mobile devices into several age categories, and also into whether they are male or female. The data on which to base the classification consists of the type of phone they have and what apps they use. Some additional information is available, but I'll focus on those pieces of information.
 
@@ -839,132 +839,6 @@ pred.insert(0, 'device_id', gender_age_test['device_id'])
 
 # Save
 pred.to_csv('output/submission.csv', index = False)
-
-# Quick look
-pred.head()
 ```
-
-
-
-
-<div>
-<style>
-    .dataframe thead tr:only-child th {
-        text-align: right;
-    }
-
-    .dataframe thead th {
-        text-align: left;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>device_id</th>
-      <th>F23-</th>
-      <th>F24-26</th>
-      <th>F27-28</th>
-      <th>F29-32</th>
-      <th>F33-42</th>
-      <th>F43+</th>
-      <th>M22-</th>
-      <th>M23-26</th>
-      <th>M27-28</th>
-      <th>M29-31</th>
-      <th>M32-38</th>
-      <th>M39+</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1002079943728939269</td>
-      <td>0.000279</td>
-      <td>0.002942</td>
-      <td>0.016042</td>
-      <td>0.006316</td>
-      <td>0.081829</td>
-      <td>0.042256</td>
-      <td>0.005911</td>
-      <td>0.028876</td>
-      <td>0.046416</td>
-      <td>0.112581</td>
-      <td>0.326887</td>
-      <td>0.329665</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>-1547860181818787117</td>
-      <td>0.019343</td>
-      <td>0.019926</td>
-      <td>0.020128</td>
-      <td>0.037448</td>
-      <td>0.053450</td>
-      <td>0.071771</td>
-      <td>0.005519</td>
-      <td>0.107294</td>
-      <td>0.154733</td>
-      <td>0.076825</td>
-      <td>0.204016</td>
-      <td>0.229548</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>7374582448058474277</td>
-      <td>0.017096</td>
-      <td>0.025145</td>
-      <td>0.021448</td>
-      <td>0.170664</td>
-      <td>0.147660</td>
-      <td>0.060522</td>
-      <td>0.024413</td>
-      <td>0.045322</td>
-      <td>0.076498</td>
-      <td>0.076949</td>
-      <td>0.185660</td>
-      <td>0.148623</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>-6220210354783429585</td>
-      <td>0.001470</td>
-      <td>0.013573</td>
-      <td>0.003913</td>
-      <td>0.017364</td>
-      <td>0.054101</td>
-      <td>0.132143</td>
-      <td>0.072650</td>
-      <td>0.175279</td>
-      <td>0.133988</td>
-      <td>0.082869</td>
-      <td>0.110197</td>
-      <td>0.202454</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>-5893464122623104785</td>
-      <td>0.035625</td>
-      <td>0.075912</td>
-      <td>0.040787</td>
-      <td>0.064321</td>
-      <td>0.049339</td>
-      <td>0.035300</td>
-      <td>0.071981</td>
-      <td>0.175083</td>
-      <td>0.110833</td>
-      <td>0.104610</td>
-      <td>0.143164</td>
-      <td>0.093045</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
 
 Above, we fitted the model on the training set, using the regularization coefficient we found through cross validation. The Kaggle competition was already closed at time of writing, but I generated a submission anyway, which scored 2.29; a reasonable score on the leaderboard for a relatively simple model!
