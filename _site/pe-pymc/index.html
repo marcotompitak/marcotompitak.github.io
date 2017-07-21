@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="shortcut icon" href="/static/img/favicon.ico" />
+        <title>Parameter estimation with pymc - Marco Tompitak</title>
+        <meta name="author" content="Marco Tompitak" />
+        <meta name="description" content="Parameter estimation with pymc" />
+        <meta name="keywords" content="Parameter estimation with pymc, Marco Tompitak, " />
+
+        <meta content="0" property="fb:app_id">
+        <meta content="Marco Tompitak" property="og:site_name">
+        
+          <meta content="Parameter estimation with pymc" property="og:title">
+        
+        
+          <meta content="article" property="og:type">
+        
+        
+          <meta content="My GitHub Page" property="og:description">
+        
+        
+          <meta content="http://localhost:4000/pe-pymc/" property="og:url">
+        
+        
+        
+          <meta content="http://localhost:4000/static/img/logo-high-resolution.png" property="og:image">
+        
+        
+        
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@\#">
+        <meta name="twitter:creator" content="@\#">
+        
+          <meta name="twitter:title" content="Parameter estimation with pymc">
+        
+        
+          <meta name="twitter:url" content="http://localhost:4000/pe-pymc/">
+        
+        
+          <meta name="twitter:description" content="My GitHub Page">
+        
+        
+
+      <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml">
+      <script type="text/javascript">window.baseurl = 'http://localhost:4000';</script>
+      
+        <!-- Custom Fonts -->
+        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+
+        <!-- FontAwesome icons -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/74dfc6cf47.css">
+
+        <!-- Core BootStrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <!-- Material Design CSS -->
+        <link rel="stylesheet" href="/static/css/bootstrap-material-design.min.css">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/static/css/syntax.css">
+
+        <!-- Custom CSS -->        
+        <link rel="stylesheet" href="/static/css/thickbox.css">
+        <link rel="stylesheet" href="/static/css/main.css">
+        <link rel="stylesheet" href="/static/css/projects.css">
+
+        <script type="text/javascript">
+          //loadingImage is relative to project dir
+          var tb_pathToImage = "/static/img/loadingAnimation.gif";
+        </script>
+
+  </head>
+
+  <body class="home overflow-hidden">
+    <div class="header-panel shadow-z-2">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3 col-sm-4 col-xs-12">
+            <div class="row-picture">
+              <img id="about" class="logo-img" src="/static/img/avatar.svg" height="75px" width="75px">
+            </div>
+            <div class="row-details">
+              <h4 class="list-group-item-heading">Marco Tompitak</h4>
+              <p class="list-group-item-text">Biophysicist</p>
+              <div class="social-icons">
+	
+        <a class="icon" target="_blank" href="https://github.com/marcotompitak"><i class="fa fa-github"></i></a>
+    
+        <a class="icon" target="_blank" href="https://www.linkedin.com/in/marcotompitak/"><i class="fa fa-linkedin"></i></a>
+    
+        <a class="icon" target="_blank" href="https://stackexchange.com/users/2808839/marco-tompitak"><i class="fa fa-stack-exchange"></i></a>
+    
+        <a class="icon" target="_blank" href="http://www.rapiddiffusion.com/"><i class="fa fa-pencil-square-o"></i></a>
+    
+</div>
+
+            </div>
+            <div class="navbar-header pull-right">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <i class="fa fa-2x fa-bars"></i>
+              </button>
+            </div>
+          </div>
+          <div class="col-md-9 col-sm-8 col-xs-12">
+          <div class="row">
+            <h2 class="blog-title-pro ">Parameter estimation with pymc</h2>
+            
+            </div>
+            <p class="info">
+              
+              
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container main outer">
+      <div class="row">
+        <div class="col-md-3 col-xs-12">
+              <nav class="menu">
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="list-separator nav navbar-nav well well-primary page">
+
+	
+	
+	
+	
+	
+	
+    
+	
+	<li class="col-lg-12 col-md-12 col-sm-4 col-xs-12  pe-pymc"><a href="/" target="_self"><i class="fa fa-home"></i> Home</a></li>
+
+	
+	
+	
+	
+	
+	
+    
+	
+	<li class="col-lg-12 col-md-12 col-sm-4 col-xs-12  pe-pymc"><a href="/about/" target="_self"><i class="fa fa-user"></i> About</a></li>
+
+	
+	
+	
+	
+	
+	
+    
+	
+	<li class="col-lg-12 col-md-12 col-sm-4 col-xs-12  pe-pymc"><a href="/projects" target="_self"><i class="fa fa-desktop"></i> Projects</a></li>
+
+	
+	
+	
+	
+	
+	
+    
+	
+	<li class="col-lg-12 col-md-12 col-sm-4 col-xs-12  pe-pymc"><a href="/publications" target="_self"><i class="fa fa-file-text-o"></i> Publications</a></li>
+
+	
+	
+	
+	
+	
+	
+    
+	
+	<li class="col-lg-12 col-md-12 col-sm-4 col-xs-12  pe-pymc"><a href="https://github.com/marcotompitak" target="_self"><i class="fa fa-github"></i> Github</a></li>
+
+</ul>
+
+    </div>
+    </nav>
+
+        </div>
+        <div class="col-md-9 col-xs-12 full">
+          <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+<div class="well" style="text-align:justify">
+    
+    <div>
+    	<h1 id="parameter-estimation-with-pymc">Parameter Estimation with <code class="highlighter-rouge">pymc</code></h1>
+
+<p><em>(This is a static version of an iPython notebook. The actual notebooks can be found on <a href="https://github.com/marcotompitak/gravitational-waves">GitHub</a>.)</em></p>
+
+<p>In the <a href="/matched-filter/">previous tutorial</a>, we used a grid search to find the most likely values of two of our chirp signal’s parameters. That worked fine, but what if we want to estimate all the parameters of the function together? And maybe do so with a much denser and/or wider grid of values? It quickly becomes computationally problematic.</p>
+
+<p>We will need a smarter way to sample the likelihoods of our parameters. Usually this is done using various Monte Carlo techniques. We will use a Markov Chain Monte Carlo (MCMC) method to perform our parameter estimation. This functionality is conveniently provided by the <code class="highlighter-rouge">pymc</code> package.</p>
+
+<p>The <a href="https://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo">MCMC</a> comes down to choosing random samples from a probability distribution, but choosing them in such a way that the set of samples you end up with approximate the probability distribution. The benefit of this kind of method is that it quickly finds the maximum of the probability distribution and samples mostly around this maximum. The rest of the parameter space is neglected, but we usually do not care.</p>
+
+<p>We will not go into the details of the mathematics behind MCMC, but rather have a look at how we can perform an MCMC sampling in Python to do parameter estimation.</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">pymc</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="kn">as</span> <span class="nn">sns</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c"># For reproducibility</span>
+
+<span class="c"># We will use the same chirp function as previously</span>
+<span class="k">def</span> <span class="nf">chirp</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">tc</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">dA</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">df</span><span class="p">):</span>
+    <span class="s">"""
+    Generate a chirp signal.
+    
+    Arguments:
+    t      -- array-like containing the times at which to evaluate the signal.
+    tc     -- time of coalescence, after which the signal is terminated; for times beyond tc the signal is set to the constant background.
+    offset -- constant background term
+    A      -- initial signal amplitude at t=0
+    dA     -- linear coefficient describing the increase of the amplitude with time
+    f      -- initial signal frequency at t=0
+    df     -- linear coefficient describing the increase of the frequency with time
+    """</span>
+    <span class="n">chirp</span> <span class="o">=</span> <span class="n">offset</span> <span class="o">+</span> <span class="p">(</span><span class="n">A</span> <span class="o">+</span> <span class="n">dA</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="p">(</span><span class="n">f</span> <span class="o">+</span> <span class="n">df</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>
+    <span class="n">chirp</span><span class="p">[</span><span class="n">t</span><span class="o">&gt;</span><span class="n">tc</span><span class="p">]</span> <span class="o">=</span> <span class="n">offset</span>
+    <span class="k">return</span> <span class="n">chirp</span>
+
+<span class="c"># Let's choose some values for our injected signal</span>
+<span class="n">tc_true</span> <span class="o">=</span> <span class="mi">75</span>
+<span class="n">offset_true</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">A_true</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="n">dA_true</span> <span class="o">=</span> <span class="mf">0.05</span>
+<span class="n">f_true</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="n">df_true</span> <span class="o">=</span> <span class="mf">0.007</span>
+
+<span class="c"># Noise strength; we will keep it low here so we </span>
+<span class="c"># don't have to run our sampling for too long</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mi">50</span>
+
+<span class="c"># Time axis</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">10001</span><span class="p">)</span>
+
+<span class="c">#y_simple_true = simple_signal(t, offset_true, A_true, f_true, df_true)</span>
+<span class="c">#y_simple_obs = np.random.normal(y_simple_true, sigma)</span>
+
+<span class="c"># Injecting our signal into the noise</span>
+<span class="n">y_true</span> <span class="o">=</span> <span class="n">chirp</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">tc_true</span><span class="p">,</span> <span class="n">offset_true</span><span class="p">,</span> <span class="n">A_true</span><span class="p">,</span> <span class="n">dA_true</span><span class="p">,</span> <span class="n">f_true</span><span class="p">,</span> <span class="n">df_true</span><span class="p">)</span>
+<span class="n">y_obs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="c"># Let's have alook</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">y_obs</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">y_true</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s">'r'</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<p><img src="/pages/ParameterEstimationWithPymc_files/ParameterEstimationWithPymc_2_0.png" alt="png" /></p>
+
+<p>The noise is not as heavy compared to the signal as last time. Smaller signals can be used, but we don’t want to have to wait for too long for the MCMC algorithm to run, so we’ll keep it simple.</p>
+
+<h3 id="setting-up-pymc">Setting up <code class="highlighter-rouge">pymc</code></h3>
+
+<p><a href="https://pymc-devs.github.io/pymc/"><code class="highlighter-rouge">pymc</code></a> is a package that implements several Bayesian statistical methods, including MCMC. It requires you to build your model by defining all the parameters to be estimated, but then it takes care of all the heavy lifting.</p>
+
+<p>First we need to specify all our parameters as independent stochastic variables.</p>
+
+<p>For each parameter, we specify:</p>
+<ol>
+  <li>The type of prior distribution, i.e. what we know before we start. In this case we assume no prior information, so we just use uniform distributions. In real applications, using prior information, such as the distribution of the masses of black holes or neutron stars in the universe, can be a real benefit; if you are confident enough that you know that distribution.</li>
+  <li>The name of the parameter, used for referencing it later.</li>
+  <li>For a uniform distribution, the range.</li>
+  <li>The initial value, which we choose to be random.</li>
+</ol>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="c"># Helper data to keep track of everything</span>
+<span class="n">parameters</span> <span class="o">=</span> <span class="p">[</span><span class="s">'tc'</span><span class="p">,</span> <span class="s">'offset'</span><span class="p">,</span> <span class="s">'A'</span><span class="p">,</span> <span class="s">'dA'</span><span class="p">,</span> <span class="s">'f'</span><span class="p">,</span> <span class="s">'df'</span><span class="p">]</span>
+<span class="n">bounds</span> <span class="o">=</span> <span class="p">{</span><span class="s">'tc'</span> <span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">),</span> <span class="s">'offset'</span> <span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">),</span> <span class="s">'A'</span> <span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span> <span class="s">'dA'</span> <span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.1</span><span class="p">),</span> <span class="s">'f'</span> <span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="s">'df'</span> <span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.1</span><span class="p">)}</span>
+
+<span class="c"># Defining our parameters using pymc.Uniform()</span>
+<span class="n">offset</span> <span class="o">=</span> <span class="n">pymc</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span>
+    <span class="s">'offset'</span><span class="p">,</span> \
+    <span class="n">bounds</span><span class="p">[</span><span class="s">'offset'</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> \
+    <span class="n">bounds</span><span class="p">[</span><span class="s">'offset'</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> \
+    <span class="n">value</span> <span class="o">=</span> <span class="n">bounds</span><span class="p">[</span><span class="s">'offset'</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> \
+    <span class="p">(</span><span class="n">bounds</span><span class="p">[</span><span class="s">'offset'</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">bounds</span><span class="p">[</span><span class="s">'offset'</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
+<span class="p">)</span>
+
+<span class="n">tc</span> <span class="o">=</span> <span class="n">pymc</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span>
+    <span class="s">'tc'</span><span class="p">,</span> \
+    <span class="n">bounds</span><span class="p">[</span><span class="s">'tc'</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> \
+    <span class="n">bounds</span><span class="p">[</span><span class="s">'tc'</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> \
+    <span class="n">value</span> <span class="o">=</span> <span class="n">bounds</span><span class="p">[</span><span class="s">'tc'</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> \
+    <span class="p">(</span><span class="n">bounds</span><span class="p">[</span><span class="s">'tc'</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">bounds</span><span class="p">[</span><span class="s">'tc'</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
+<span class="p">)</span>
+
+<span class="n">A</span> <span class="o">=</span> <span class="n">pymc</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span>
+    <span class="s">'A'</span><span class="p">,</span> \
+    <span class="n">bounds</span><span class="p">[</span><span class="s">'A'</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> \
+    <span class="n">bounds</span><span class="p">[</span><span class="s">'A'</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> \
+    <span class="n">value</span> <span class="o">=</span> <span class="n">bounds</span><span class="p">[</span><span class="s">'A'</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> \
+    <span class="p">(</span><span class="n">bounds</span><span class="p">[</span><span class="s">'A'</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">bounds</span><span class="p">[</span><span class="s">'A'</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
+<span class="p">)</span>
+
+<span class="n">dA</span> <span class="o">=</span> <span class="n">pymc</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span>
+    <span class="s">'dA'</span><span class="p">,</span> \
+    <span class="n">bounds</span><span class="p">[</span><span class="s">'dA'</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> \
+    <span class="n">bounds</span><span class="p">[</span><span class="s">'dA'</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> \
+    <span class="n">value</span> <span class="o">=</span> <span class="n">bounds</span><span class="p">[</span><span class="s">'dA'</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> \
+    <span class="p">(</span><span class="n">bounds</span><span class="p">[</span><span class="s">'dA'</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">bounds</span><span class="p">[</span><span class="s">'dA'</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
+<span class="p">)</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="n">pymc</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span>
+    <span class="s">'f'</span><span class="p">,</span> \
+    <span class="n">bounds</span><span class="p">[</span><span class="s">'f'</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> \
+    <span class="n">bounds</span><span class="p">[</span><span class="s">'f'</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> \
+    <span class="n">value</span> <span class="o">=</span> <span class="n">bounds</span><span class="p">[</span><span class="s">'f'</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> \
+    <span class="p">(</span><span class="n">bounds</span><span class="p">[</span><span class="s">'f'</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">bounds</span><span class="p">[</span><span class="s">'f'</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
+<span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pymc</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span>
+    <span class="s">'df'</span><span class="p">,</span> \
+    <span class="n">bounds</span><span class="p">[</span><span class="s">'df'</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> \
+    <span class="n">bounds</span><span class="p">[</span><span class="s">'df'</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> \
+    <span class="n">value</span> <span class="o">=</span> <span class="n">bounds</span><span class="p">[</span><span class="s">'df'</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> \
+    <span class="p">(</span><span class="n">bounds</span><span class="p">[</span><span class="s">'df'</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">bounds</span><span class="p">[</span><span class="s">'df'</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
+<span class="p">)</span>
+</code></pre>
+</div>
+
+<p>Next we need to define our template. In <code class="highlighter-rouge">pymc</code> this is just another variable, but we need to tell it that this is not a stochastic variable, but that its value depends on all the other variables. We do this using the <code class="highlighter-rouge">deterministic</code> decorator.</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="nd">@pymc.deterministic</span>
+<span class="k">def</span> <span class="nf">y_model</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">,</span> <span class="n">tc</span><span class="o">=</span><span class="n">tc</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="n">offset</span><span class="p">,</span> <span class="n">A</span><span class="o">=</span><span class="n">A</span><span class="p">,</span> <span class="n">dA</span><span class="o">=</span><span class="n">dA</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="n">f</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">chirp</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">tc</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">dA</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p>Finally we need to tell <code class="highlighter-rouge">pymc</code> about our data. Also the data is represented as a variable by <code class="highlighter-rouge">pymc</code>, which may be a bit counterintuitive at first. The type of stochastic variable specifies our assumptions about the noise; we use <code class="highlighter-rouge">pymc.Normal()</code> for our Gaussian noise. The mean of this normal distribution we specify to be our template, <code class="highlighter-rouge">y_model</code>, and its variance is given by our noise strength.</p>
+
+<p>To specify that this is data and not a variable, we use two additional keywords to specify it: we set <code class="highlighter-rouge">observed=True</code> to denote that it is an observed value that should never change during the sampling, and we set its value to our actual data using <code class="highlighter-rouge">value=y_obs</code>. This makes <code class="highlighter-rouge">y</code> a <em>realization</em> of a stochastic variable, rather than a variable to be sampled.</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">y</span> <span class="o">=</span> <span class="n">pymc</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s">'y'</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">y_model</span><span class="p">,</span> <span class="n">tau</span><span class="o">=</span><span class="n">sigma</span><span class="o">**-</span><span class="mi">2</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">y_obs</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p>Next we wrap it all into a <code class="highlighter-rouge">pymc</code> model, and start a new MCMC instance.</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">model</span> <span class="o">=</span> <span class="n">pymc</span><span class="o">.</span><span class="n">Model</span><span class="p">([</span><span class="n">y</span><span class="p">,</span> <span class="n">tc</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">dA</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">y_model</span><span class="p">])</span>
+<span class="n">M</span> <span class="o">=</span> <span class="n">pymc</span><span class="o">.</span><span class="n">MCMC</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p>Then we just tell <code class="highlighter-rouge">pymc</code> how many samples we want, and it will do everything for us. The <code class="highlighter-rouge">burn</code> parameter specifies the burn-in period. The MCMC sampling will take some time to find the right part of the parameter space to sample, and the samples from the beginning of the run are not usually interesting, and distort our picture of the probability distributions, so we can discard some of them. We will discard the first half of our run.</p>
+
+<p>The <code class="highlighter-rouge">thin</code> parameter specifies how to thin out the samples. MCMC samples have some autocorrelation, so you may want to only take every n-th sample so that they are all independent. We will not worry about this for now and set it to the default value of 1.</p>
+
+<p>Run the following command and <code class="highlighter-rouge">pymc</code> will run our sampling. It may take a little time, depending on how fast your machine is. It also requires a good deal of memory. If you don’t want to run the sampling yourself, skip ahead; we’ll load up pre-generated data.</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="c"># May take a while; skip ahead to pre-generated</span>
+<span class="c"># data if you prefer</span>
+<span class="n">M</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="nb">iter</span><span class="o">=</span><span class="mi">100000</span><span class="p">,</span> <span class="n">burn</span><span class="o">=</span><span class="mi">50000</span><span class="p">,</span> <span class="n">thin</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p>That’s it. Now we can have a look at the results. You can examine the trace of any of the parameters by looking at for example the object <code class="highlighter-rouge">M.trace('A')[:]</code>, which will give you the trace of A.</p>
+
+<p>However, for convenience we will instead save our results, and load them back up, so we can use pregenerated data.</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="c"># Convert the results of our MCMC sampling</span>
+<span class="k">def</span> <span class="nf">mcmc_dataframe</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">skip_vars</span><span class="p">):</span>
+    <span class="n">names</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">M</span><span class="o">.</span><span class="n">variables</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">trace</span><span class="o">.</span><span class="n">name</span>
+            <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">skip_vars</span><span class="p">:</span>
+                <span class="n">names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">trace</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+                <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">trace</span><span class="o">.</span><span class="n">gettrace</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+        <span class="k">except</span> <span class="nb">AttributeError</span><span class="p">:</span>
+            <span class="k">pass</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">names</span>
+    <span class="k">return</span> <span class="n">df</span>
+
+<span class="c"># Save as csv</span>
+<span class="n">mcmc_dataframe</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="p">[</span><span class="s">'y_model'</span><span class="p">])</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s">'samples.csv'</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="c"># Load up the samples. Using pregenerated; change</span>
+<span class="c"># the filename if you want to load your own.</span>
+<span class="n">samples</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'samples_pregen.csv'</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p>Let’s have a look at the histogram for our amplitude.</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">samples</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s">'A'</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<p><img src="/pages/ParameterEstimationWithPymc_files/ParameterEstimationWithPymc_18_0.png" alt="png" /></p>
+
+<h3 id="exercise-3">Exercise 3</h3>
+
+<ol>
+  <li>Did the sampler estimate the right value for A?</li>
+  <li>How big is the error in its estimate of A?</li>
+  <li>We saw in the previous tutorial that estimating A is harder than estimating the frequency. Is the same true this time?</li>
+</ol>
+
+<h2 id="results">Results</h2>
+
+<p>Let’s look at our results in general. Using the <code class="highlighter-rouge">seaborn</code> package, we can create a nice set of pairwise plots for our parameters.</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="c"># Some settings for Seaborn</span>
+<span class="n">sns</span><span class="o">.</span><span class="nb">set</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s">"ticks"</span><span class="p">,</span> <span class="n">color_codes</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c"># Wrapper function for the hexbin plotting style</span>
+<span class="k">def</span> <span class="nf">hexbin</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">cmap</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">light_palette</span><span class="p">(</span><span class="n">color</span><span class="p">,</span> <span class="n">as_cmap</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">hexbin</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">gridsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="n">cmap</span><span class="p">,</span> <span class="n">mincnt</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span>
+
+<span class="c"># Helper arrays</span>
+<span class="n">var_order</span> <span class="o">=</span> <span class="p">[</span><span class="s">'offset'</span><span class="p">,</span> <span class="s">'tc'</span><span class="p">,</span> <span class="s">'A'</span><span class="p">,</span> <span class="s">'dA'</span><span class="p">,</span> <span class="s">'f'</span><span class="p">,</span> <span class="s">'df'</span><span class="p">]</span>
+<span class="n">truth</span> <span class="o">=</span> <span class="p">[</span><span class="n">offset_true</span><span class="p">,</span> <span class="n">tc_true</span><span class="p">,</span> <span class="n">A_true</span><span class="p">,</span> <span class="n">dA_true</span><span class="p">,</span> <span class="n">f_true</span><span class="p">,</span> <span class="n">df_true</span><span class="p">]</span>
+<span class="n">est</span> <span class="o">=</span> <span class="n">samples</span><span class="p">[</span><span class="n">var_order</span><span class="p">]</span><span class="o">.</span><span class="nb">max</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
+
+<span class="c"># Plot a pairwise grid of scatter plots and histograms</span>
+<span class="k">with</span> <span class="n">sns</span><span class="o">.</span><span class="n">axes_style</span><span class="p">(</span><span class="s">"white"</span><span class="p">):</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span>
+        <span class="n">samples</span><span class="p">[</span><span class="n">var_order</span><span class="p">],</span>
+        <span class="c"># We don't actually want the scatter plots, so we set</span>
+        <span class="c"># the marker size to 0</span>
+        <span class="n">plot_kws</span><span class="o">=</span><span class="p">{</span><span class="s">"s"</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span> 
+        <span class="n">diag_kws</span><span class="o">=</span><span class="p">{</span><span class="s">'color'</span><span class="p">:</span> <span class="s">'green'</span><span class="p">,</span> <span class="s">'lw'</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+    <span class="p">)</span>
+    
+    <span class="c"># Replace the scatter plots with hexbin plots</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">map_offdiag</span><span class="p">(</span><span class="n">hexbin</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">'green'</span><span class="p">);</span>
+
+
+<span class="c"># Plot the injected values in the histograms</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">var_order</span><span class="p">)):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">var_order</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">j</span><span class="p">:</span>
+            <span class="n">ax</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">([</span><span class="n">truth</span><span class="p">[</span><span class="n">j</span><span class="p">]],</span> <span class="p">[</span><span class="n">truth</span><span class="p">[</span><span class="n">i</span><span class="p">]],</span> <span class="n">color</span> <span class="o">=</span> <span class="s">"black"</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="s">'x'</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p><img src="/pages/ParameterEstimationWithPymc_files/ParameterEstimationWithPymc_20_0.png" alt="png" /></p>
+
+<p>The pairwise scatterplots above give us a good idea of our results, showing us how well the parameters have been estimated, and making clear any correlations between the parameters.</p>
+
+<p>We see that <code class="highlighter-rouge">A</code> and <code class="highlighter-rouge">dA</code> have not been estimated very well. That’s not a problem with our technique: the data simply doesn’t contain the information we need to estimate them accurately. We also see they’re correlated, as might be expected. Similarly, <code class="highlighter-rouge">f</code> and <code class="highlighter-rouge">df</code> show strong correlation: apparently it is difficult to estimate them both at the same time. However, the peak in each is quite close to the injected values.</p>
+
+<h3 id="exercise-4">Exercise 4</h3>
+<ol>
+  <li>The time of coalescence <code class="highlighter-rouge">tc</code> has been estimated very accurately, showing a sharp peak at the right value, and its estimate doesn’t appear to be correlated with any other parameters. Can you explain why?</li>
+  <li>Why are <code class="highlighter-rouge">A</code>/<code class="highlighter-rouge">dA</code> and <code class="highlighter-rouge">f</code>/<code class="highlighter-rouge">df</code> negatively correlated?</li>
+</ol>
+
+<h2 id="concluding-remarks">Concluding remarks</h2>
+
+<p>The massive challenge in gravitational wave detectors is that the signals are orders of magnitude smaller than the noise (even after a great deal of effort has been devoted to reducing that noise), but because it’s possible to predict the shapes of signals from General Relativity, it becomes possible to dig them out.</p>
+
+<p>The reality of the problem is much more complicated than the examples we have looked at. There are generally more parameters, meaning a higher-dimensional distribution to sample, and more noise. This means more advanced techniques are required, such as <a href="https://en.wikipedia.org/wiki/Nested_sampling_algorithm">nested sampling</a>. However, hopefully these two notebooks have given at least an idea of how matched filtering can be used to detect gravitational waves.</p>
+
+
+    </div>
+</div>
+
+          <div class="row">
+            <div class="col-md-12 col-xs-12 footer">
+              <footer>
+  © 2017 Marco Tompitak - Powered by Jekyll.
+</footer>
+
+            </div>
+          </div>
+        </div> <!-- end /.col-md-9 -->
+      </div> <!-- end /.row -->
+    </div>
+
+    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<script src="/static/js/thickbox-compressed.js"></script>
+<script src="/static/js/material.min.js"></script>
+<script src="/static/js/main.js"></script>
+<script src="/static/js/projects.js"></script>
+
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-47199852-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>

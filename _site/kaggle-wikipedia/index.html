@@ -184,10 +184,22 @@
 
         </div>
         <div class="col-md-9 col-xs-12 full">
-          <div class="well" style="text-align:justify">
+          <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+<div class="well" style="text-align:justify">
     
     <div>
     	<h2 id="kaggle-competition-wikipedia-traffic-time-series">Kaggle Competition: Wikipedia Traffic Time Series</h2>
+
+<p><em>(This is a static version of an iPython notebook. The actual notebook and further code can be found on <a href="https://github.com/marcotompitak/kaggle-code/tree/master/Wikipedia%20Traffic">GitHub</a>.)</em></p>
 
 <p>In this notebook we’ll have a look at the <a href="https://www.kaggle.com/c/web-traffic-time-series-forecasting">Wikipedia Traffic Kaggle competition</a>. The goal is to forecast the amount of traffic to various Wikipedia pages.</p>
 

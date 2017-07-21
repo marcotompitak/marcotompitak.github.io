@@ -1,5 +1,13 @@
 [
 	{
+		"name": "Kaggle Competition: TalkingData Mobile Users",
+		"image": "logit.png",
+		"url": "/kaggle-talkingdata/",
+        "github": "https://github.com/marcotompitak/kaggle-code/tree/master/TalkingData",
+		"date": "Jul 2017",
+		"tags": ["Python","sklearn","logistic regression"]
+	},
+	{
 		"name": "Kaggle Competition: Wikipedia Traffic",
 		"image": "wikipedia.png",
 		"url": "/kaggle-wikipedia/",
