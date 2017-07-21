@@ -7,6 +7,8 @@ permalink: /kaggle-talkingdata/
 Kaggle Competition: Classify Mobile Users
 -----------------------------------------------
 
+_(This is a static version of an iPython notebook. The actual notebook can be found on [GitHub](https://github.com/marcotompitak/kaggle-code/tree/master/TalkingData).)_
+
 This is an analysis for the [TalkingData Mobile User Demographics](https://www.kaggle.com/c/talkingdata-mobile-user-demographics) Kaggle competition. The competition was already closed when I started this, but I went through it for practice. I got a score of 2.29, which, if I had been able to join the leaderboard, would have been at position 1028 out of 1689; a decent enough score for a simple approach.
 
 From the discussion board of the competition, it seems like many people used `xgboost` for this challenge, but I've done a competition with `xgboost` before, so I'll try something else: logistic regression. This was not so trivial, because I quickly ran out of memory to store my one-hot encoded features. Full credit goes to the person who made [this beautiful kernel](https://www.kaggle.com/dvasyukova/a-linear-model-on-apps-and-labels) available for teaching me how to get around that.
@@ -128,7 +130,7 @@ device_apps['app_id'].value_counts().size
 
 
 
-A naive call to pd.get_dummies() quickly results in a memory error. My machine, at least, is not able to deal with creating so many dummies.
+A naive call to `pd.get_dummies()` quickly results in a memory error. My machine, at least, is not able to deal with creating so many dummies.
 
 However, for any given device, almost certainly only a very small subset of apps is installed. We can therefore encode our dummy variables in a sparse matrix. To do so, we will use `csr_matrix` from `scipy`, which stores the data in [Compressed Sparse Row](https://en.wikipedia.org/wiki/Sparse_matrix#Compressed_sparse_row_.28CSR.2C_CRS_or_Yale_format.29) format. To do so, we need to give it the non-zero values in the matrix (i.e. all the 1s for the apps a given device has installed), and the row and column indices where they are supposed to go.
 
@@ -310,7 +312,7 @@ sparse_encoding_apps.head()
 
 
 
-Using the dataframe we just created, we can now build our sparse matrix. Using `csr_matrix( (data, (row_indices, column_indices) ) )`, build it as follows.
+Using the dataframe we just created, we can now build our sparse matrix. Using `csr_matrix( (data, (row_indices, column_indices) ) )`, it builds it as follows.
 
 
 ```python
@@ -436,7 +438,7 @@ plt.show()
 ![png](/pages/ClassifyMobileUsers_files/ClassifyMobileUsers_17_0.png)
 
 
-We see that the optimal value for the regularization is around 0.01, and we're reaching a score of around 2.4, which is on the low end of the Kaggle leaderboard. We can look at a finer grid around 0.01 and optimize a bit further, allowing us to dip below 2.39.
+We see that the optimal value for the regularization is around 0.01, and we're reaching a score of around 2.37, which is on the lower end of the Kaggle leaderboard. We can look at a finer grid around 0.01 and optimize a bit further, allowing us to dip a little lower.
 
 
 ```python
@@ -445,7 +447,6 @@ logreg_cv = LogisticRegressionCV(
     penalty = 'l2', 
     multi_class = 'multinomial',
     solver = 'lbfgs',
-    fit_intercept = False,
     max_iter = 1000,
     cv = 5,
     n_jobs = 6,
@@ -607,7 +608,6 @@ logreg_cv = LogisticRegressionCV(
     penalty = 'l2', 
     multi_class = 'multinomial',
     solver = 'lbfgs',
-    fit_intercept = False,
     max_iter = 1000,
     cv = 5,
     n_jobs = 6,
@@ -622,7 +622,7 @@ plt.show()
 ![png](/pages/ClassifyMobileUsers_files/ClassifyMobileUsers_25_0.png)
 
 
-The optimal value for the regularization has shifted a little, but more importantly, our score has greatly improved to about 2.36. What happens if we also add the phone models?
+The optimal value for the regularization has shifted a little, but more importantly, our score has improved to about 2.355. What happens if we also add the phone models?
 
 The models require a little bit of preprocessing, because different brands seem to use the same model names sometimes.
 
@@ -709,7 +709,6 @@ logreg_cv = LogisticRegressionCV(
     penalty = 'l2', 
     multi_class = 'multinomial',
     solver = 'lbfgs',
-    fit_intercept = False,
     max_iter = 1000,
     cv = 5,
     n_jobs = 6,
@@ -817,7 +816,6 @@ logreg = LogisticRegression(
     penalty = 'l2', 
     multi_class = 'multinomial',
     solver = 'lbfgs',
-    fit_intercept = False,
     max_iter = 1000,
     n_jobs = 6,
 )
@@ -886,82 +884,82 @@ pred.head()
     <tr>
       <th>0</th>
       <td>1002079943728939269</td>
-      <td>0.000281</td>
-      <td>0.002943</td>
-      <td>0.016022</td>
-      <td>0.006342</td>
-      <td>0.083250</td>
-      <td>0.042505</td>
-      <td>0.005963</td>
-      <td>0.028700</td>
-      <td>0.047145</td>
-      <td>0.112938</td>
-      <td>0.325913</td>
-      <td>0.327998</td>
+      <td>0.000279</td>
+      <td>0.002942</td>
+      <td>0.016042</td>
+      <td>0.006316</td>
+      <td>0.081829</td>
+      <td>0.042256</td>
+      <td>0.005911</td>
+      <td>0.028876</td>
+      <td>0.046416</td>
+      <td>0.112581</td>
+      <td>0.326887</td>
+      <td>0.329665</td>
     </tr>
     <tr>
       <th>1</th>
       <td>-1547860181818787117</td>
-      <td>0.019392</td>
-      <td>0.020178</td>
-      <td>0.020385</td>
-      <td>0.037651</td>
-      <td>0.053464</td>
-      <td>0.072346</td>
-      <td>0.005471</td>
-      <td>0.106510</td>
-      <td>0.155289</td>
-      <td>0.076740</td>
-      <td>0.203469</td>
-      <td>0.229104</td>
+      <td>0.019343</td>
+      <td>0.019926</td>
+      <td>0.020128</td>
+      <td>0.037448</td>
+      <td>0.053450</td>
+      <td>0.071771</td>
+      <td>0.005519</td>
+      <td>0.107294</td>
+      <td>0.154733</td>
+      <td>0.076825</td>
+      <td>0.204016</td>
+      <td>0.229548</td>
     </tr>
     <tr>
       <th>2</th>
       <td>7374582448058474277</td>
-      <td>0.017118</td>
-      <td>0.024718</td>
-      <td>0.020569</td>
-      <td>0.168225</td>
-      <td>0.146595</td>
-      <td>0.059321</td>
-      <td>0.024701</td>
-      <td>0.046026</td>
-      <td>0.076444</td>
-      <td>0.077444</td>
-      <td>0.187997</td>
-      <td>0.150844</td>
+      <td>0.017096</td>
+      <td>0.025145</td>
+      <td>0.021448</td>
+      <td>0.170664</td>
+      <td>0.147660</td>
+      <td>0.060522</td>
+      <td>0.024413</td>
+      <td>0.045322</td>
+      <td>0.076498</td>
+      <td>0.076949</td>
+      <td>0.185660</td>
+      <td>0.148623</td>
     </tr>
     <tr>
       <th>3</th>
       <td>-6220210354783429585</td>
-      <td>0.001461</td>
-      <td>0.013365</td>
-      <td>0.003832</td>
-      <td>0.017157</td>
-      <td>0.053270</td>
-      <td>0.130423</td>
-      <td>0.072654</td>
-      <td>0.175614</td>
-      <td>0.133862</td>
-      <td>0.083067</td>
-      <td>0.111116</td>
-      <td>0.204178</td>
+      <td>0.001470</td>
+      <td>0.013573</td>
+      <td>0.003913</td>
+      <td>0.017364</td>
+      <td>0.054101</td>
+      <td>0.132143</td>
+      <td>0.072650</td>
+      <td>0.175279</td>
+      <td>0.133988</td>
+      <td>0.082869</td>
+      <td>0.110197</td>
+      <td>0.202454</td>
     </tr>
     <tr>
       <th>4</th>
       <td>-5893464122623104785</td>
-      <td>0.035689</td>
-      <td>0.076453</td>
-      <td>0.041487</td>
-      <td>0.064746</td>
-      <td>0.049523</td>
-      <td>0.035591</td>
-      <td>0.071675</td>
-      <td>0.174221</td>
-      <td>0.111159</td>
-      <td>0.104379</td>
-      <td>0.142464</td>
-      <td>0.092615</td>
+      <td>0.035625</td>
+      <td>0.075912</td>
+      <td>0.040787</td>
+      <td>0.064321</td>
+      <td>0.049339</td>
+      <td>0.035300</td>
+      <td>0.071981</td>
+      <td>0.175083</td>
+      <td>0.110833</td>
+      <td>0.104610</td>
+      <td>0.143164</td>
+      <td>0.093045</td>
     </tr>
   </tbody>
 </table>
