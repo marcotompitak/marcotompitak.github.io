@@ -2,6 +2,8 @@
 layout: page
 title: Kaggle - TalkingData
 permalink: /kaggle-talkingdata/
+date:   2017-07-21 00:00:00
+categories: data-science kaggle
 ---
 
 Kaggle Competition: Classify Mobile Users

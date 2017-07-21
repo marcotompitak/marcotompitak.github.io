@@ -2,6 +2,8 @@
 layout: page
 title: Kaggle - Wikipedia
 permalink: /kaggle-wikipedia/
+date:   2017-07-19 00:00:00
+categories: data-science kaggle
 ---
 
 Kaggle Competition: Wikipedia Traffic Time Series

@@ -2,6 +2,8 @@
 layout: page
 title: Kaggle - Zillow
 permalink: /kaggle-zillow/
+date:   2017-07-19 00:00:00
+categories: data-science kaggle
 ---
 
 

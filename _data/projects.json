@@ -32,6 +32,14 @@
 		"tags": ["Python","MCMC","Didactic"]
 	},
 	{
+		"name": "Course in Statistical Learning",
+		"image": "r-pairs.png",
+		"url": "/stat-learn-r/",
+        "github": "https://github.com/marcotompitak/stanford-stat-learn",
+		"date": "Jul 2017",
+		"tags": ["R"]
+	},
+	{
 		"name": "Nucleosome Positioning with Markov Chains",
 		"image": "Selection.png",
 		"url": "https://SchiesselLab.github.io/index.html#proj-markov",

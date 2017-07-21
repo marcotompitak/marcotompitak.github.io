@@ -2,6 +2,8 @@
 layout: page
 title: Matched Filtering
 permalink: /matched-filter/
+date:   2017-07-20 00:00:00
+categories: signal-processing didactic
 ---
 
 # Searching for Signals using Matched Filters

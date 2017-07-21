@@ -2,6 +2,8 @@
 layout: page
 title: Parameter estimation with pymc
 permalink: /pe-pymc/
+date:   2017-07-20 00:00:00
+categories: signal-processing didactic
 ---
 
 # Parameter Estimation with `pymc`

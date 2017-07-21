@@ -2,6 +2,8 @@
 layout: page
 title: Stanford - Statistical Learning R Code
 permalink: /stat-learn-r/
+date:   2017-07-19 00:00:00
+categories: data-science
 ---
 
 
