@@ -168,7 +168,7 @@ categories: data-science app
                 var fd = new FormData(document.forms["form1"]);
  
                 var xhr = new XMLHttpRequest({mozSystem: true});
-                xhr.open('POST', 'http://mnist-canvas.herokuapp.com/post-data-url', true);
+                xhr.open('POST', 'https://mnist-canvas.herokuapp.com/post-data-url', true);
 
                 xhr.onreadystatechange = function () {
                     if (xhr.readyState == XMLHttpRequest.DONE) {
