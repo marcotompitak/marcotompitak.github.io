@@ -1,5 +1,13 @@
 [
 	{
+		"name": "Flask App: MNIST Canvas Interface",
+		"image": "mnist.png",
+		"url": "/mnist-canvas/",
+        "github": "https://github.com/marcotompitak/mnist-canvas",
+		"date": "Jul 2017",
+		"tags": ["Python","flask","keras"]
+	},
+	{
 		"name": "Gravitational Waves and Matched Filters",
 		"image": "chirp.png",
 		"url": "/matched-filter/",
