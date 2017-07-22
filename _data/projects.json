@@ -1,5 +1,13 @@
 [
 	{
+		"name": "Gravitational Waves and Matched Filters",
+		"image": "chirp.png",
+		"url": "/matched-filter/",
+        "github": "https://github.com/marcotompitak/gravitational-waves",
+		"date": "Jul 2017",
+		"tags": ["Python","MCMC","Didactic"]
+	},
+	{
 		"name": "Kaggle Competition: TalkingData Mobile Users",
 		"image": "logit.png",
 		"url": "/kaggle-talkingdata/",
@@ -22,14 +30,6 @@
         "github": "https://github.com/marcotompitak/kaggle-code/tree/master/Zillow",
 		"date": "Jul 2017",
 		"tags": ["Python","xgboost"]
-	},
-	{
-		"name": "Gravitational Waves and Matched Filters",
-		"image": "chirp.png",
-		"url": "/matched-filter/",
-        "github": "https://github.com/marcotompitak/gravitational-waves",
-		"date": "Jul 2017",
-		"tags": ["Python","MCMC","Didactic"]
 	},
 	{
 		"name": "Course in Statistical Learning",

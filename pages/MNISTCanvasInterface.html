@@ -1,0 +1,194 @@
+---
+layout: page
+title: MNIST Canvas Interface
+permalink: /mnist-canvas/
+date:   2017-07-22 00:00:00
+categories: data-science app
+---
+
+        <style>
+            #wrap {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .flank, #canvas {
+                width: 280px;
+                height: 280px;
+                margin: 0px;
+                border:1px solid black;
+                text-align: center
+            }
+            .control_container {
+                width: 100px;
+                height: 280px;
+                margin: 0px;
+                text-align: center;
+                display: table
+            }
+            .button-wrapper {
+                display: table-cell;
+                vertical-align: middle;
+            }
+            .canvas-control-button {
+                margin-top: 0.5em;
+                margin-bottom: 0.5em;
+                background-color: rgb(0, 99, 160);
+                border: none;
+                color: white;
+                padding: 3px 4px;
+                text-align: center;
+                font-weight: bold;
+          
+            }
+            #num {
+                font-size: 280px;
+                line-height: 280px; 
+                text-align: center
+            }
+            hr {
+               display: block;
+               position: relative;
+               padding: 0;
+               margin: 20px auto;
+               height: 0;
+               width: 100%;
+               max-height: 0;
+               font-size: 1px;
+               line-height: 0;
+               clear: both;
+               border: none;
+               border-top: 1px solid #aaaaaa;
+               border-bottom: 1px solid #ffffff;
+            }
+        </style>
+        
+        
+        <center><h1>Draw a number in the left-hand box</h1></center>
+        <div id="wrap">
+            
+                <canvas width="280" height="280" id="canvas">canvas</canvas>
+            
+            
+            <div class="control_container">
+                <div class="button-wrapper">
+                    <input class="canvas-control-button" type="button" onclick="uploadEx()" value="Recognize" style="vertical-align:middle"/> 
+                    <input class="canvas-control-button" type="button" onclick="clearCanvas()" value="Clear" style="vertical-align:middle"/>
+                </div>
+            </div>
+            
+            <div class="flank">
+                <span id="num" style=""></span>
+            </div>
+        </div>
+        
+        <script type="text/javascript">
+            /* Canvas drawing code adapted from https://jsfiddle.net/j3xDg/
+               Communication with server adapted from 
+               http://www.codepool.biz/upload-html-canvas-data-to-php-server.html */
+        
+            var canvas = document.querySelector('#canvas');
+            var ctx = canvas.getContext('2d');
+            var mouse = {x: 0, y: 0};
+            var last_mouse = {x: 0, y: 0};
+            
+            /* Mouse Capturing Work */
+            canvas.addEventListener('mousemove', function(e) {
+                last_mouse.x = mouse.x;
+                last_mouse.y = mouse.y;
+                
+                var canvas = document.querySelector('#canvas');
+                var rect = canvas.getBoundingClientRect();
+                
+                /* Modified this to avoid problems with
+                   scrolling the page */
+                if (e.offsetX) {
+                    mouse.x = e.offsetX;
+                    mouse.y = e.offsetY;
+                }
+                else if (e.layerX) {
+                    mouse.x = e.layerX;
+                    mouse.y = e.layerY;
+                }
+            }, false);
+            
+            window.onload = function() {
+                var canvas = document.getElementById("canvas");
+                var context = canvas.getContext("2d");
+                context.rect(0, 0, 280, 280);
+                context.fillStyle = 'white';
+                context.fill();
+            }
+            
+            /* Drawing on Paint App */
+            ctx.lineWidth = 30;
+            ctx.lineJoin = 'round';
+            ctx.lineCap = 'round';
+            ctx.strokeStyle = 'black';
+            
+            canvas.addEventListener('mousedown', function(e) {
+                canvas.addEventListener('mousemove', onPaint, false);
+            }, false);
+            
+            canvas.addEventListener('mouseup', function() {
+                canvas.removeEventListener('mousemove', onPaint, false);
+            }, false);
+            
+            var onPaint = function() {
+                ctx.beginPath();
+                ctx.moveTo(last_mouse.x, last_mouse.y);
+                ctx.lineTo(mouse.x, mouse.y);
+                ctx.closePath();
+                ctx.stroke();
+            };
+            
+            function clearCanvas() {
+                var canvas = document.getElementById("canvas");
+                var context = canvas.getContext("2d");
+                context.clearRect(0, 0, canvas.width, canvas.height);
+                context.rect(0, 0, 280, 280);
+                context.fillStyle = 'white';
+                context.fill();
+            }
+        </script>
+ 
+        <div>
+            
+        </div>
+ 
+        <form method="post" accept-charset="utf-8" name="form1">
+            <input name="data" id='data' type="hidden"/>
+        </form>
+ 
+        <script>
+            function uploadEx() {
+                var canvas = document.getElementById("canvas");
+                var dataURL = canvas.toDataURL("image/png");
+                document.getElementById('data').value = dataURL;
+                var fd = new FormData(document.forms["form1"]);
+ 
+                var xhr = new XMLHttpRequest({mozSystem: true});
+                xhr.open('POST', 'http://mnist-canvas.herokuapp.com/post-data-url', true);
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == XMLHttpRequest.DONE) {
+                        document.getElementById('num').innerHTML = xhr.responseText;
+                        
+                    }
+                }
+    
+                xhr.onload = function() {
+ 
+                };
+                xhr.send(fd);
+            };
+        </script>
+
+
+<hr>
+
+<p>The interface above lets you draw a number in the left-hand box and send it to a neural network to be recognized. The result will appear in the right-hand box. The app is running over at <a href="https://heroku.com">Heroku</a>; if the interface above doesn't seem to be working, try the <a href="http://mnist-canvas.herokuapp.com/">interface hosted on the same server</a>.</p>
+
+<p>The back-end is a Python Flask application, using <code>keras</code> to load up a pregenerated neural network trained on the <a href="https://en.wikipedia.org/wiki/MNIST_database">MNIST dataset</a>. For more information, see the app's <a href="https://github.com/marcotompitak/mnist-canvas">GitHub repository</a>.</p>
+
+
