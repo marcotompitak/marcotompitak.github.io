@@ -1,8 +1,16 @@
 [
 	{
+		"name": "Kaggle Competition: Instacart Recommender",
+		"image": "hodsig.png",
+		"url": "/kaggle-instacart/",
+        "github": "https://github.com/marcotompitak/kaggle-code/tree/master/Instacart",
+		"date": "Jul 2017",
+		"tags": ["Python","xgboost"]
+	},
+	{
 		"name": "Flask App: MNIST Canvas Interface",
 		"image": "mnist.png",
-		"url": "/mnist-canvas/",
+		"demo": "/mnist-canvas/",
         "github": "https://github.com/marcotompitak/mnist-canvas",
 		"date": "Jul 2017",
 		"tags": ["Python","flask","keras"]

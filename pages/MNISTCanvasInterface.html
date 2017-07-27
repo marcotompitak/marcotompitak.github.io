@@ -67,7 +67,7 @@ categories: data-science app
         <center><h1>Draw a number in the left-hand box</h1></center>
         <div id="wrap">
             
-                <canvas width="280" height="280" id="canvas">canvas</canvas>
+                <canvas width="280" height="280" id="canvas" onload="uploadEx()">canvas</canvas>
             
             
             <div class="control_container">
@@ -91,6 +91,8 @@ categories: data-science app
             var ctx = canvas.getContext('2d');
             var mouse = {x: 0, y: 0};
             var last_mouse = {x: 0, y: 0};
+            var touch = {x: 0, y: 0};
+            var last_touch = {x: 0, y: 0};
             
             /* Mouse Capturing Work */
             canvas.addEventListener('mousemove', function(e) {
@@ -112,6 +114,28 @@ categories: data-science app
                 }
             }, false);
             
+
+
+            /* Touch Capturing Work */
+            canvas.addEventListener('touchmove', function(e) {
+                last_touch.x = touch.x;
+                last_touch.y = touch.y;
+                
+                var canvas = document.querySelector('#canvas');
+                var rect = canvas.getBoundingClientRect();
+                
+                if (e.touches) {
+                    if (e.touches.length == 1) { // Only deal with one finger
+                        var t = e.touches[0]; // Get the information for finger #1
+                        touch.x=t.clientX-rect.left;
+                        touch.y=t.clientY-rect.top;
+                    }
+                }
+                if (e.target == canvas) {
+                    e.preventDefault();
+                }
+            }, false);
+            
             window.onload = function() {
                 var canvas = document.getElementById("canvas");
                 var context = canvas.getContext("2d");
@@ -127,6 +151,9 @@ categories: data-science app
             ctx.strokeStyle = 'black';
             
             canvas.addEventListener('mousedown', function(e) {
+                if (e.target == canvas) {
+                    e.preventDefault();
+                }
                 canvas.addEventListener('mousemove', onPaint, false);
             }, false);
             
@@ -134,10 +161,51 @@ categories: data-science app
                 canvas.removeEventListener('mousemove', onPaint, false);
             }, false);
             
+            canvas.addEventListener('touchstart', function(e) {
+                if (e.target == canvas) {
+                    e.preventDefault();
+                }
+                
+                
+                last_touch.x = touch.x;
+                last_touch.y = touch.y;
+                
+                var canvas = document.querySelector('#canvas');
+                var rect = canvas.getBoundingClientRect();
+                
+                if (e.touches) {
+                    if (e.touches.length == 1) { // Only deal with one finger
+                        var t = e.touches[0]; // Get the information for finger #1
+                        touch.x=t.clientX-rect.left;
+                        touch.y=t.clientY-rect.top;
+                    }
+                }
+                if (e.target == canvas) {
+                    e.preventDefault();
+                }
+
+                last_touch.x = touch.x;
+                last_touch.y = touch.y;
+                canvas.addEventListener('touchmove', onPaintTouch, false);
+            }, false);
+            
+            canvas.addEventListener('touchend', function() {
+                canvas.removeEventListener('touchmove', onPaintTouch, false);
+            }, false);
+            
             var onPaint = function() {
                 ctx.beginPath();
                 ctx.moveTo(last_mouse.x, last_mouse.y);
                 ctx.lineTo(mouse.x, mouse.y);
+                ctx.closePath();
+                ctx.stroke();
+            };
+            
+            var onPaintTouch = function() {
+                ctx.moveTo(last_touch.x, last_touch.y);
+                ctx.beginPath();
+                ctx.moveTo(last_touch.x, last_touch.y);
+                ctx.lineTo(touch.x, touch.y);
                 ctx.closePath();
                 ctx.stroke();
             };
@@ -187,8 +255,12 @@ categories: data-science app
 
 <hr>
 
-<p>The interface above lets you draw a number in the left-hand box and send it to a neural network to be recognized. The result will appear in the right-hand box. The app is running over at <a href="https://heroku.com">Heroku</a>; if the interface above doesn't seem to be working, try the <a href="http://mnist-canvas.herokuapp.com/">interface hosted on the same server</a>.</p>
+<p>The interface above lets you draw a number in the left-hand box and send it to a neural network to be recognized. The result will appear in the right-hand box.</p> 
 
-<p>The back-end is a Python Flask application, using <code>keras</code> to load up a pregenerated neural network trained on the <a href="https://en.wikipedia.org/wiki/MNIST_database">MNIST dataset</a>. For more information, see the app's <a href="https://github.com/marcotompitak/mnist-canvas">GitHub repository</a>.</p>
+<center><h1>Not working?</h1></center>
+
+<p><b>Please note:</b> the app is running over at <a href="https://heroku.com">Heroku</a>, which is a free service that unloads the app from memory if it's not used for 30 minutes. If the interface above doesn't seem to be working, give it a few seconds to boot up, or <a href="http://mnist-canvas.herokuapp.com/">try the interface hosted on Heroku</a>. (Similarly, that page may take a little while to load if the app is not running.)</p>
+
+<p>The back-end of this app is a Python Flask application, using <code>keras</code> to load up a pregenerated neural network trained on the <a href="https://en.wikipedia.org/wiki/MNIST_database">MNIST dataset</a>. For more information, see the app's <a href="https://github.com/marcotompitak/mnist-canvas">GitHub repository</a>.</p>
 
 
