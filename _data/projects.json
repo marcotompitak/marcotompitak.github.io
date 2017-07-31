@@ -1,5 +1,13 @@
 [
 	{
+		"name": "Kaggle: Carvana Image Segmentation",
+		"image": "carvana.png",
+		"url": "/kaggle-carvana/",
+        "github": "https://github.com/marcotompitak/kaggle-code/tree/master/Carvana",
+		"date": "Jul 2017",
+		"tags": ["Python","keras", "CNN"]
+	},
+	{
 		"name": "Kaggle Competition: Instacart Recommender",
 		"image": "hodsig.png",
 		"url": "/kaggle-instacart/",
