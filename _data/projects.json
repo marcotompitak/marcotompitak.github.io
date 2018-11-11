@@ -1,5 +1,13 @@
 [
 	{
+		"name": "deperson: Dutch Text Depersonalization",
+		"image": "default.png",
+		"url": "/deperson/",
+        "github": "https://github.com/kpnDataScienceLab/deperson",
+		"date": "Jun 2018",
+		"tags": ["Python"]
+	},
+	{
 		"name": "Kaggle: Carvana Image Segmentation",
 		"image": "carvana.png",
 		"url": "/kaggle-carvana/",
